@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.R.attr.max;
+
 /**
  * EditText in Material Design
  * <p/>
@@ -1457,7 +1459,12 @@ public class MaterialEditText extends AppCompatEditText {
     } else if (maxCharacters <= 0) {
       text = isRTL() ? "+" + minCharacters + " / " + checkLength(getText()) : checkLength(getText()) + " / " + minCharacters + "+";
     } else {
-      text = isRTL() ? maxCharacters + "-" + minCharacters + " / " + checkLength(getText()) : checkLength(getText()) + " / " + minCharacters + "-" + maxCharacters;
+      if (minCharacters == maxCharacters) {
+        text = isRTL() ? maxCharacters + " / " + checkLength(getText()) : checkLength(getText()) + " / " + maxCharacters;
+      }
+      else {
+        text = isRTL() ? maxCharacters + "-" + minCharacters + " / " + checkLength(getText()) : checkLength(getText()) + " / " + minCharacters + "-" + maxCharacters;
+      }
     }
     return text;
   }
